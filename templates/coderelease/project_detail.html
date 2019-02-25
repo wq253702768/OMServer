@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 项目详情 {% endblock %}
+{% block css %}
+
+    <!-- PNotify -->
+    <link href="{% static 'vendors/pnotify/dist/pnotify.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pnotify/dist/pnotify.buttons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/pnotify/dist/pnotify.nonblock.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2><i class="fa fa-bars">项目详情</i>  <small>project detail</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">详情</a>
+                                    </li>
+                                    <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">基础配置</a>
+                                    <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">主机</a>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="x_panel">
+                                                    <div class="x_content">
+                                                        <p><h3>概况</h3></p>
+                                                        <table class="table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>项目名称：</td>
+                                                                <td><b>{{ pro.pro_name }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>类型：</td>
+                                                                <td><b>{{ pro.pro_type }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>域名：</td>
+                                                                <td><b>{{ pro.domain }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>环境：</td>
+                                                                <td><b>{{ pro.env_name }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>GIT地址：</td>
+                                                                <td><b>{{ pro.git_url }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>分支：</td>
+                                                                <td><b>{{ pro.branch }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>kwargs：</td>
+                                                                <td><b>{{ pro.kwargs }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>开发负责人：</td>
+                                                                <td><b>{{ pro.principal }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>创建时间：</td>
+                                                                <td><b>{{ pro.c_time }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>更新时间：</td>
+                                                                <td><b>{{ pro.u_time }}</b></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                      <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="x_panel">
+                                                    <div class="x_content">
+                                                        <p><h3>配置详情</h3></p>
+                                                        <table class="table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>Jenkins url：</td>
+                                                                <td><b>{{ pro.jenkins_url }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Docker registry ：</td>
+                                                                <td><b>{{ pro.docker_registry }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Api server：</td>
+                                                                <td><b>{{ pro.api_server }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Name space：</td>
+                                                                <td><b>{{ pro.namespace }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Redis password：</td>
+                                                                <td><b>{{ pro.redis_pass }}</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Rabbitmq password：</td>
+                                                                <td><b>{{ pro.rabbit_pass }}</b></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="x_panel">
+                                                <div class="x_content">
+
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>服务名</th>
+                                                            <th>IP</th>
+                                                            <th>Port</th>
+                                                            <th>路径</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for i in host_list %}
+                                                            <tr>
+                                                                <th scope="row">{{ i.2 }}</th>
+                                                                <td>{{ i.0 }}</td>
+                                                                <td>{{ i.1 }}</td>
+                                                                <td>{{ i.3 }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>执行操作 <small> action</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li class="dropdown">
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <p>检查信息没问题后,可以点击发布按钮.</p>
+                            <div class="col-md-9 col-sm-9 col-xs-12" >
+
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12" >
+                                {% if pro.release_status == "1"  %}
+                                    <button type="button" id="no_release" value="{{ pro.id }}" class="btn btn-primary btn-sm"  data-toggle="modal" data-target=".bs-example-modal-lg" onclick="releaseBtn()"><i class="fa fa-paper-plane-o"></i> {{ pro.get_release_status_display }}</button>
+                                {% elif pro.release_status == "2"  %}
+                                    <button type="button" id="pro_id" class="btn btn-warning btn-sm"  data-toggle="modal" disabled="disabled" data-target=".bs-example-modal-lg"><i class="fa fa-refresh"></i> {{ pro.get_release_status_display }}</button>
+                                {% elif pro.release_status == "4"  %}
+                                    <button type="button" id="pro_id" class="btn btn-danger btn-sm"  data-toggle="modal" data-target=".bs-example-modal-lg" onclick="releaseBtn()"><i class="fa fa-minus-circle"></i> {{ pro.get_release_status_display }}</button>
+                                {% else %}
+                                    <button type="button" id="pro_id" class="btn btn-success btn-sm"  disabled="disabled" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-check-circle"></i> {{ pro.get_release_status_display }}</button>
+                                {% endif %}
+                                <!-- modals -->
+                                <!-- Large modal -->
+                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel">项目详情</h4>
+                                            </div>
+                                            <div class="modal-body" id="result">
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /modals -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
+
+{% block script %}
+
+    <!-- PNotify -->
+    <script src="{% static 'vendors/pnotify/dist/pnotify.js' %}"></script>
+    <script src="{% static 'vendors/pnotify/dist/pnotify.buttons.js' %}"></script>
+    <script src="{% static 'vendors/pnotify/dist/pnotify.nonblock.js' %}"></script>
+
+    <script>
+        function releaseBtn() {
+            var id = document.getElementById('no_release').value;
+            if(confirm('确定开始操作？')){
+                $.ajax({
+                    type: "get",
+                    data: {"pro_id": id},
+                    url: "{% url 'ops_project_release_url' %}",
+                    success: function (data) {
+                        if (data.data){
+                            console.log(data.data.task_id);
+                            OTimer = setInterval(function () {
+                                $.ajax({
+                                    type: "get",
+                                    data: {'task_id': data.data.task_id,'pro_id': data.data.pro_id},
+                                    url: "{% url 'ops_celery_task_url' %}",
+                                    success: function (data) {
+                                        console.log(data);
+                                        var box = document.getElementById("result");
+                                        var li = document.createElement("li");
+                                        li.innerHTML = data.result;
+                                        box.appendChild(li);
+                                        if(data.status == "SUCCESS"){
+                                            clearInterval(OTimer);
+                                        }
+                                    }
+                                })
+                            },2000)
+                        }
+                    }
+                })
+            }
+        }
+        function LocationBtn() {
+            window.location()
+        }
+    </script>
+{% endblock %}

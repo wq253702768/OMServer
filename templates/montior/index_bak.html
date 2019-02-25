@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 资产总表 {% endblock %}
+{% block content %}
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+                        <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>pod 监控详情 <small>monitor pod status detail</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <p class="btn btn-primary btn-large">
+                                环境名称： {{ env_name }}
+                            </p>
+                            <br>
+                            <p class="btn btn-primary btn-large">
+                                数据时间： {{ last_ctime }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row top_tiles" style="margin: 10px 0;">
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
+                        <div class="count">{{ total_pod_num }}</div>
+                        <h3>Total</h3>
+                        <p>kubernetes pod total.</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-bell"></i></div>
+                        <div class="count">{{ last_up_len }}</div>
+                        <h3>UP</h3>
+                        <p>pod up</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-bell-slash"></i></div>
+                  <div class="count">{{ last_down_len }}</div>
+                  <h3>Down</h3>
+                  <p>pod down.</p>
+                </div>
+              </div>
+            </div>
+            <br />
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard_graph x_panel">
+                        <div class="row x_title">
+                            <div class="col-md-6">
+                                <h3>Network Activities <small>Graph title sub-title</small></h3>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_content">
+                            <div class="demo-container" style="height:250px">
+                                <div id="chart_plot_03" class="demo-placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
+
+{% block script %}
+
+    <!-- jQuery Sparklines -->
+    <script src="{% static 'vendors/jquery-sparkline/dist/jquery.sparkline.min.js' %}"></script>
+    <!-- morris.js -->
+    <script src="{% static 'vendors/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'vendors/morris.js/morris.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+{% endblock %}

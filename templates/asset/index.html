@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 资产总表 {% endblock %}
+{% block css %}
+    <!-- Datatables -->
+    <link href="{% static 'vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>资产总表 <small>asset list</small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <p class="text-muted font-13 m-b-30">
+                            所有资产汇总信息
+                        </p>
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>资产类型</th>
+                                <th>子类型</th>
+                                <th>资产名称</th>
+                                <th>SN</th>
+                                <th>业务线</th>
+                                <th>状态</th>
+                                <th>机房</th>
+                                <th>更新日期</th>
+                                <th>标签</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for asset in asset_all %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    {% if asset.asset_type == 'server' %}
+                                        <td class="text-success">{{ asset.get_asset_type_display }}</td>
+                                        <td>{{ asset.server.get_sub_asset_type_display }}</td>
+                                    {% endif %}
+                                    {% if asset.asset_type == 'server' %}
+                                        <td><a href="{% url 'asset_detail_url' asset.id %}">{{ asset.name }}</a></td>
+                                    {% else %}
+                                        <td>{{ asset.name }}</td>
+                                    {% endif %}
+                                    <td>{{ asset.sn }}</td>
+                                    <td>{{ asset.business_unit|default_if_none:"-" }}</td>
+                                    {% if asset.status == 0 %}
+                                        <td><label class="label label-success">{{ asset.get_status_display }}</label></td>
+                                    {% elif asset.status == 1 %}
+                                        <td><label class="label label-warning">{{ asset.get_status_display }}</label></td>
+                                    {% elif asset.status == 2 %}
+                                        <td><label class="label label-default">{{ asset.get_status_display }}</label></td>
+                                    {% elif asset.status == 3 %}
+                                        <td><label class="label label-danger">{{ asset.get_status_display }}</label></td>
+                                    {% elif asset.status == 4 %}
+                                        <td><label class="label label-info">{{ asset.get_status_display }}</label></td>
+                                    {% endif %}
+                                    <td>{{ asset.idc|default:"-" }}</td>
+                                    <td>{{ asset.m_time|date:"Y/m/d [H:m:s]" }}</td>
+                                    <td>
+                                        {% for tag in asset.tags.all %}
+                                            <label class="label label-primary">{{ tag.name }}</label>
+                                        {% empty %}
+                                            -
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>没有数据！</tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+{% endblock %}
+{% block script %}
+    <!-- Datatables -->
+    <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{%  static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{%  static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
+    <script src="{% static 'vendors/jszip/dist/jszip.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+
+{% endblock %}

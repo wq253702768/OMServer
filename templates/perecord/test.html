@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 资产总表 {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'custom/layui/css/layui.css' %}">
+{% endblock %}
+{% block content %}
+                <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>项目信息 <small>请填写项目详细信息</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <form id="project_form" class="form-horizontal form-label-left">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12 layui-form-label">date</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12 layui-input-inline">
+                                        <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'custom/layui/layui.js' %}"></script>
+    <script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#test5',
+            type: 'datetime'
+        });
+    })
+    </script>
+{% endblock %}
+

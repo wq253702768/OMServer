@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 资产详情 {% endblock %}
+{% block css %}
+    <!-- Datatables -->
+    <link href="{% static 'vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>资产详情 <small>asset detail</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <p class="btn btn-primary btn-large">
+                                资产： {{ asset.name }}
+                            </p>
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>概览 <small>Bordered table subtitle</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>类型</th>
+                                            <th>SN</th>
+                                            <th>业务线</th>
+                                            <th>制造商</th>
+                                            <th>管理IP</th>
+                                            <th>机房</th>
+                                            <th>标签</th>
+                                            <th>更新日期</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ asset.get_asset_type_display }}</td>
+                                            <td>{{ asset.sn }}</td>
+                                            <td>{{ asset.business_unit|default:'N/A' }}</td>
+                                            <td>{{ asset.manufacturer|default:'N/A' }}</td>
+                                            <td>{{ asset.manage_ip|default:'N/A' }}</td>
+                                            <td>{{ asset.idc|default:'N/A' }}</td>
+                                            <td>
+                                                {% for tag in asset.tags.all %}
+                                                    <label class="label label-primary">{{ tag.name }}</label>
+                                                {% empty %}
+                                                    -
+                                                {% endfor %}
+                                            </td>
+                                            <td>{{ asset.m_time }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>合同</th>
+                                            <th>价格</th>
+                                            <th>购买日期</th>
+                                            <th>过保日期</th>
+                                            <th>管理员</th>
+                                            <th>批准人</th>
+                                            <th>备注</th>
+                                            <th>批准日期</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ asset.contract.name|default:'N/A' }}</td>
+                                            <td>{{ asset.price|default:'N/A' }}</td>
+                                            <td>{{ asset.purchase_day|default:'N/A' }}</td>
+                                            <td>{{ asset.expire_day|default:'N/A' }}</td>
+                                            <td>{{ asset.admin|default:'N/A' }}</td>
+                                            <td>{{ asset.approved_by|default:'N/A' }}</td>
+                                            <td>{{ asset.memo|default:'N/A' }}</td>
+                                            <td>{{ asset.m_time }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>服务器 <small>Server table subtitle</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>服务器类型</th>
+                                            <th>型号</th>
+                                            <th>宿主机</th>
+                                            <th>Raid类型</th>
+                                            <th>OS类型</th>
+                                            <th>OS发行版本</th>
+                                            <th>OS版本</th>
+                                            <th>添加方式</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ asset.server.get_sub_asset_type_display }}</td>
+                                            <td>{{ asset.server.model|default:'N/A' }}</td>
+                                            <td>{{ asset.server.hosted_on.id|default:'N/A' }}</td>
+                                            <td>{{ asset.server.raid_type|default:'N/A' }}</td>
+                                            <td>{{ asset.server.os_type|default:'N/A' }}</td>
+                                            <td>{{ asset.server.os_distribution|default:'N/A' }}</td>
+                                            <td>{{ asset.server.os_release|default:'N/A' }}</td>
+                                            <td>{{ asset.server.get_created_by_display }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="x_title">
+                                    <h2>CPU <small>CPU table subtitle</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th  style="width: 45%">CPU型号</th>
+                                            <th  style="width: 15%">物理CPU个数</th>
+                                            <th>CPU核数</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ asset.cpu.cpu_model|default:'N/A' }}</td>
+                                            <td>{{ asset.cpu.cpu_count|default:'1' }}</td>
+                                            <td>{{ asset.cpu.cpu_core_count|default:'1' }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="x_title">
+                                    <h2>内存 <small>Memory table subtitle</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th style="width:5%;">序号</th>
+                                            <th>型号</th>
+                                            <th>容量</th>
+                                            <th>插槽</th>
+                                            <th>制造商</th>
+                                            <th>SN</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for ram in asset.ram_set.all %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ ram.model|default:'N/A' }}</td>
+                                                <td>{{ ram.capacity|default:'N/A' }}</td>
+                                                <td>{{ ram.slot }}</td>
+                                                <td>{{ ram.manufacturer|default:'N/A' }}</td>
+                                                <td>{{ ram.sn|default:'N/A' }}</td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr>
+                                                <td></td><td></td><td></td><td></td><td></td><td></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="x_title">
+                                    <h2>硬盘 <small>Disk table subtitle</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th style="width:5%;">序号</th>
+                                            <th>型号</th>
+                                            <th>容量</th>
+                                            <th>插槽</th>
+                                            <th>接口类型</th>
+                                            <th>制造商</th>
+                                            <th>SN</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for disk in asset.disk_set.all %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ disk.model|default:'N/A' }}</td>
+                                                <td>{{ disk.capacity|default:'N/A' }}</td>
+                                                <td>{{ disk.slot|default:'N/A'  }}</td>
+                                                <td>{{ disk.get_interface_type_display }}</td>
+                                                <td>{{ disk.manufacturer|default:'N/A' }}</td>
+                                                <td>{{ disk.sn}}</td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr>
+                                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="x_title">
+                                    <h2>网卡 <small>Network card table subtitle</small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th style="width:5%;">序号</th>
+                                            <th>名称</th>
+                                            <th>型号</th>
+                                            <th>MAC</th>
+                                            <th>IP</th>
+                                            <th>掩码</th>
+                                            <th>绑定地址</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for nic in asset.nic_set.all %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ nic.name|default:'N/A' }}</td>
+                                                <td>{{ nic.model }}</td>
+                                                <td>{{ nic.mac  }}</td>
+                                                <td>{{ nic.ip_address|default:'N/A' }}</td>
+                                                <td>{{ nic.net_mask|default:'N/A' }}</td>
+                                                <td>{{ nic.bonding|default:'N/A' }}</td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr>
+                                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
+{% block script %}
+    <!-- Datatables -->
+    <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{%  static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{%  static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
+    <script src="{% static 'vendors/jszip/dist/jszip.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+
+{% endblock %}

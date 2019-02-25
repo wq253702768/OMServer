@@ -1,0 +1,48 @@
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{% url 'home_url' %}">Dashboard</a></li>
+                    {#                    <li><a href="index2.html">Dashboard2</a></li>#}
+                    {#                    <li><a href="index_bak.html">Dashboard3</a></li>#}
+                </ul>
+            </li>
+            <li><a><i class="fa fa-table"></i> 平台管理 <span class="fa fa-chevron-down"></span></a>
+                <ul id="plat" class="nav child_menu">
+                    <li><a href="{% url 'platform_list_url' 'dev' %}">开发</a></li>
+                    <li><a href="{% url 'platform_list_url' 'test' %}">测试</a></li>
+                    <li><a href="{% url 'platform_list_url' 're' %}"> new 预发</a></li>
+                    <li><a href="{% url 'platform_list_url' 'pre' %}">预发</a></li>
+                    <li><a href="{% url 'platform_list_url' 'prd' %}">生产</a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-table"></i> 资产管理 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{% url 'assets_list_url' %}">资产总表</a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-desktop"></i> 版本发布 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{% url 'coderelease_project_list_url' %}">项目管理</a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-bar-chart-o"></i> 监控 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{% url 'env_status_url' %}">POD状态监控</a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-edit"></i> 个人记录 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{% url 'perecord_overtime_list_url' %}">加班记录</a></li>
+                    <li><a href="#">工作记录</a></li>
+                    <li><a href="{% url 'perecord_test_url' %}">TEST</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<!-- /sidebar menu -->

@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 资产总表 {% endblock %}
+{% block content %}
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>监控详情 <small> env pod monitor detail</small></h3>
+                </div>
+
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>数据采集时间：{{ current_time }}</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+
+                                <ul class="stats-overview">
+                                    <li>
+                                        <span class="name"> Total pod </span>
+                                        <span class="value text-success"> {{ current_total_pod }} </span>
+                                    </li>
+                                    <li>
+                                        <span class="name"> Up pod </span>
+                                        <span class="value text-success"> {{ current_up_pod }} </span>
+                                    </li>
+                                    <li class="hidden-phone">
+                                        <span class="name"> Down pod </span>
+                                        <span class="value text-danger"> {{ current_down_pod }} </span>
+                                    </li>
+                                </ul>
+                                <br />
+                                <div id="app"></div>
+                                <div id="testb" style="height:350px;"></div>
+                            </div>
+
+                            <!-- start project-detail sidebar -->
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+
+                                <section class="panel">
+
+                                    <div class="x_title">
+                                        <h2>环境详情</h2>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-unstyled project_files">
+                                            <li><h4><strong>名称：</strong>{{ envs.memo }} </h4></li>
+                                            <br />
+                                            <li><h4><strong>Tag：</strong>{{ envs.name }} </h4></li>
+                                        </ul>
+
+                                    </div>
+
+                                </section>
+                            </div>
+                            <!-- end project-detail sidebar -->
+
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>New ten <small>the new data</small></h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Total</th>
+                                                <th>up</th>
+                                                <th>down</th>
+                                                <th>时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in ten_data_list %}
+                                                <tr>
+                                                    <td>{{i.0 }}</td>
+                                                    <td>{{ i.1 }}</td>
+                                                    <td>{{ i.2 }}</td>
+                                                    <td>{{ i.3 }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+{% endblock %}
+
+{% block script %}
+    <!-- ECharts -->
+    <script src="{% static 'vendors/echarts/dist/echarts.min.js' %}"></script>
+    <script type="text/javascript">
+
+var myChart = echarts.init(document.getElementById('testb'));
+
+
+option = {
+    title: {
+        text: '动态数据',
+        subtext: '纯属虚构'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#283b56'
+            }
+        }
+    },
+    legend: {
+        data:['down', 'up']
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    dataZoom: {
+        show: false,
+        start: 0,
+        end: 100
+    },
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: true,
+            data: (function (){
+                var now = new Date();
+                var res = [];
+                var len = 20;
+                while (len--) {
+                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                    now = new Date(now - 2000);
+                }
+                console.log('x[1]:',res);
+                return res;
+            })()
+        },
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            scale: true,
+            name: '次数',
+            {#max: 30,#}
+            min: 0,
+            boundaryGap: [0.2, 0.2]
+        },
+    ],
+    series: [
+        {
+            name:'up',
+            type:'bar',
+            {#xAxisIndex: 1,#}
+            {#yAxisIndex: 1,#}
+            data:(function (){
+                var res = [];
+                var len = 20;
+                while (len--) {
+                    d = Math.round(Math.random());
+                    res.push(d);
+                }
+                console.log('y[1]:',res);
+                return res;
+            })()
+        },
+        {
+            name:'down',
+            type:'bar',
+            data:(function (){
+                var res = [];
+                var len = 0;
+                while (len < 20) {
+                    res.push((Math.random()*10 + 5).toFixed(1) - 0);
+                    len++;
+                }
+                console.log('y[2]:',res);
+                return res;
+            })()
+        }
+    ]
+};
+
+app.count = 11;
+setInterval(function (){
+    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+
+    var data0 = option.series[0].data;
+    var data1 = option.series[1].data;
+    data0.shift();
+    data0.push(Math.round(Math.random() * 1000));
+    {#data1.shift();#}
+    {#data1.push((Math.random() * 10 + 5).toFixed(1) - 0);#}
+
+    option.xAxis[0].data.shift();
+    option.xAxis[0].data.push(axisData);
+    {#option.xAxis[1].data.shift();#}
+    {#option.xAxis[1].data.push(app.count++);#}
+
+    myChart.setOption(option);
+}, 2100);
+
+    </script>
+{% endblock %}

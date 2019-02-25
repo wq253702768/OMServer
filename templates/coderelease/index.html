@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 项目管理 {% endblock %}
+{% block css %}
+    <!-- Datatables -->
+    <link href="{% static 'vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>项目列表 <small>project list</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <p class="text-muted font-13 m-b-30">
+                                <a href="{% url 'coderelease_project_add_url' %}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i> 新增</a>
+                            </p>
+                            <table id="datatable" class="table table-striped table-bordered" onclick="getValue()">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">编号</th>
+                                    <th class="text-center">项目名</th>
+                                    <th class="text-center">服务类型</th>
+                                    <th class="text-center">负责人</th>
+                                    <th class="text-center">环境</th>
+                                    <th class="text-center">发布状态</th>
+                                    <th class="text-center">创建时间</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for pro in project_obj %}
+                                    <tr>
+                                        <td class="text-center">{{ pro.id }}</td>
+                                        <td class="text-success">{{ pro.pro_name }}</td>
+                                        <td class="text-center">{{ pro.pro_type }}</td>
+                                        <td class="text-center">{{ pro.principal }}</td>
+                                        <td class="text-center">{{ pro.env_name }}</td>
+                                        <td class="text-center">
+                                            {% if pro.release_status == '3' %}
+                                            <button class="btn btn-success btn-xs"> {{ pro.get_release_status_display }}</button>
+                                            {% elif pro.release_status == '4' %}
+                                            <button class="btn btn-danger btn-xs"> {{ pro.get_release_status_display }}</button>
+                                            {% else %}
+                                            <button class="btn btn-warning btn-xs"> {{ pro.get_release_status_display }}</button>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">{{ pro.c_time}}</td>
+                                        <td class="text-center">
+{#                                            <button type="button" id="pro_id" class="btn btn-primary btn-sm viewbtn"  data-toggle="modal" data-target=".bs-example-modal-lg" onclick="viewBtn()"><i class="fa fa-eye"></i> 查看</button>#}
+                                            <a href="{% url 'coderelease_project_detail_url' pro.id %}" class="btn btn-primary btn-sm" ><i class="fa fa-eye"></i> 查看</a>
+                                            <a href="{% url 'coderelease_project_edit_url' pro.id %}" class="btn btn-primary btn-sm" ><i class="fa fa-edit"></i> 编辑</a>
+                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> 删除</button>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>没有数据！</tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <label id="lab"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
+{% block script %}
+    <!-- Datatables -->
+    <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{%  static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{%  static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
+    <script src="{% static 'vendors/jszip/dist/jszip.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+    <script>
+    function viewBtn() {
+        var tableId = document.getElementById("pro_id");
+        alert('dada:',tableId.rows[1].cells[1].innerHTML);
+        var str = "";
+        for (var i=1;i<tableId.rows.length;i++){
+            alert(tableId.rows[i].cells[1].innerHTML);
+        }
+    }
+    </script>
+{% endblock %}

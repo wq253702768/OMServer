@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 平台管理 {% endblock %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="row top_tiles">
+                {% for plat in platform_obj %}
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon"></div>
+                        <div class="count">{{ plat.id }}</div>
+                        <h3><a target="_blank" href="{{ plat.plat_url }}">{{ plat.plat_name }}</a></h3>
+                        <p><a target="_blank" href="{{ plat.plat_url }}">{{ plat.plat_url }}</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
+
+{% block script %}
+    <!-- Flot plugins -->
+    <script src="{% static  'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js"' %}></script>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 资产总表 {% endblock %}
+{% block content %}
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>监控页面 <small>monitor page</small></h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Kubernetes 环境列表</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <p>all of kubernetes pod is running , env is running</p>
+
+                            <!-- start project list -->
+                            <table class="table table-striped projects">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 20%">环境名称</th>
+                                    <th class="text-center">Status</th>
+                                    <th>Down百分比</th>
+                                    <th class="text-center">时间</th>
+                                    <th style="width: 20%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for monitor in monitor_obj %}
+                                    <tr>
+                                        <td class="text-center">{{ monitor.0 }}</td>
+                                        <td class="text-center">
+                                            {% if  monitor.3  > 0 %}
+                                            <button type="button" class="btn btn-danger btn-group-lg">down</button>
+                                                {% else %}
+                                                <button type="button" class="btn btn-success btn-group-lg">up</button>
+                                            {% endif %}
+                                        </td>
+                                        <td class="project_progress">
+                                            <div class="progress progress_sm">
+                                                <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{{ monitor.3 }}"></div>
+                                            </div>
+                                            <small>{{ monitor.3 }}</small>
+                                        </td>
+                                        <td class="text-center">{{ monitor.2 }}</td>
+                                        <td>
+                                            <a href="{% url 'env_status_detail_url' monitor.1 %}" class="btn btn-primary btn-group-sm"><i class="fa fa-folder"></i> 查看 </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <!-- end project list -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+
+{% endblock %}

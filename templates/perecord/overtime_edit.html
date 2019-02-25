@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 新增项目 {% endblock %}
+{% block css %}
+
+    <!-- bootstrap-wysiwyg -->
+    <link href="{% static 'vendors/google-code-prettify/bin/prettify.min.css' %}" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="{% static 'vendors/select2/dist/css/select2.min.css' %}" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="{% static 'vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
+    <!-- starrr -->
+    <link href="{% static 'vendors/starrr/dist/starrr.css' %}" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+
+    <link href="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>编辑项目</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>项目信息 <small>请填写项目详细信息</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <form id="project_form" method="post" class="form-horizontal form-label-left">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">加班人</label>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input type="text" id="overtime_man" name="overtime_man" class="form-control" placeholder="name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-6 col-xs-12">开始时间</label>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input type="text" class="layui-input" id="start_time" placeholder="yyyy年MM月dd日 H时m分s秒">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">结束时间</label>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input type="text" class="layui-input" id="end_time" placeholder="yyyy年MM月dd日 H时m分s秒">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">加班原因</label>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <textarea id="overtime_event" name="overtime_event" class="form-control" placeholder="dada">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                        <button type="button" class="btn btn-primary">取消</button>
+                                        <button type="submit" class="btn btn-success">提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
+
+{% block script %}
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="{% static 'vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery.hotkeys/jquery.hotkeys.js' %}"></script>
+    <script src="{% static 'vendors/google-code-prettify/src/prettify.js' %}"></script>
+    <!-- jQuery Tags Input -->
+    <script src="{% static 'vendors/jquery.tagsinput/src/jquery.tagsinput.js' %}"></script>
+    <!-- Switchery -->
+    <script src="{% static 'vendors/switchery/dist/switchery.min.js' %}"></script>
+    <!-- Select2 -->
+    <script src="{% static 'vendors/select2/dist/js/select2.full.min.js' %}"></script>
+    <!-- Parsley -->
+    <script src="{% static 'vendors/parsleyjs/dist/parsley.min.js' %}"></script>
+    <!-- Autosize -->
+    <script src="{% static 'vendors/autosize/dist/autosize.min.js' %}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{% static 'vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
+    <!-- starrr -->
+    <script src="{% static 'vendors/starrr/dist/starrr.js' %}"></script>
+
+    <script>
+        function selected_info(){
+            var args = $("#project_form").serialize();
+            window.location = "{% url 'coderelease_project_add_url' %}?" + args
+        }
+    </script>
+    <script>
+        function AddProjectBtn() {
+            var project_name = document.getElementById('project_name').value;
+            var pro_type = document.getElementById('pro_type').value;
+            if (pro_type == 'web'){
+                var domain = document.getElementById('domain').value;
+            }
+
+
+            var dev_principal = document.getElementById('dev_principal').value;
+            var env = document.getElementById('env').value;
+            var git_address = document.getElementById('git_address').value;
+            if (project_name!=='' &&  pro_type!=='' && env!=='' && git_address!==''){
+                if (confirm("确定提交?")){
+                    $.ajax({
+                        type: "post",
+                        data:{
+                            'project_name': project_name,
+                            'pro_type': pro_type,
+                            'domain': domain,
+                            'env': env,
+                            'git_address': git_address,
+                            'dev_principal': dev_principal,
+                        },
+                        url: "{% url 'coderelease_project_add_url' %}",
+                        success: function (data) {
+                            if (data){
+                                alert(data)
+                            }
+                        }
+                    });
+                }
+            }
+            else {
+                alert('数据不能为空')
+            }
+
+        }
+
+    </script>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 新增项目 {% endblock %}
+{% block css %}
+
+    <!-- bootstrap-wysiwyg -->
+    <link href="{% static 'vendors/google-code-prettify/bin/prettify.min.css' %}" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="{% static 'vendors/select2/dist/css/select2.min.css' %}" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="{% static 'vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
+    <!-- starrr -->
+    <link href="{% static 'vendors/starrr/dist/starrr.css' %}" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+
+    <link href="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <body>
+
+
+
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2><i class="fa fa-bars">项目详情</i>  <small>project detail</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <button type="button" id="pro_id" class="btn btn-primary btn-sm"  data-toggle="modal" data-target=".bs-example-modal-lg" onclick="releaseBtn()"><i class="fa fa-eye"></i> 操作</button>
+                                <div class="x_content">
+                                    <!-- modals -->
+                                    <!-- Large modal -->
+                                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">项目详情</h4>
+                                                </div>
+                                                <div class="modal-body" id="result">
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /modals -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        function releaseBtn(){
+            if(confirm('确定开始操作？')){
+                $.ajax({
+                    type: "get",
+                    data: {
+                        "pro_name": "ud-admin-job"
+                    },
+                    url: "{% url 'test1_url' %}",
+                    success: function (data) {
+                        if (data){
+                            OTimer = setInterval(function () {
+                                $.ajax({
+                                    type: "get",
+                                    url: "{% url 'test_url' %}",
+                                    success: function (data) {
+                                        console.log(data);
+                                        var box = document.getElementById("result");
+                                        var li = document.createElement("li");
+                                        for(j=0,len=data.data.length; j < len; j++) {
+                                            console.log(data.data[j]);
+                                            li.innerHTML = data.data[j];
+                                            box.appendChild(li);
+                                        }
+
+                                    }
+                                })
+                            },2000)
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+{% endblock %}

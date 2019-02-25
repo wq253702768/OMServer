@@ -1,0 +1,11 @@
+---
+- name: test nginx webroot directory  exist
+  stat: path=/opt/wenqi/wenqi
+  register: nginx_webroot_dir
+
+- name: create k8s project nginx root  directory
+  file: path=/opt/wenqi/wenqi  state=directory
+  when: not nginx_webroot_dir.stat.exists
+
+- name: raw
+  raw:  ifconfig

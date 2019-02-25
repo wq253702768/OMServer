@@ -1,0 +1,66 @@
+[25/Jan/2019 12:04:42] "GET /perecord/overtime/list/ HTTP/1.1" 200 19256
+[25/Jan/2019 12:04:42] "GET /perecord/overtime/report/?page=1&limit=10 HTTP/1.1" 200 1812
+[25/Jan/2019 12:04:45] "GET /perecord/overtime/list/ HTTP/1.1" 200 19256
+[25/Jan/2019 12:04:45] "GET /perecord/overtime/report/?page=1&limit=10 HTTP/1.1" 200 1812
+[25/Jan/2019 12:04:48] "GET /perecord/overtime/report/?page=1&limit=20 HTTP/1.1" 200 1812
+[25/Jan/2019 12:04:56] "GET /logout/ HTTP/1.1" 302 0
+[25/Jan/2019 12:04:56] "GET / HTTP/1.1" 200 2593
+[25/Jan/2019 12:05:01] "POST / HTTP/1.1" 302 0
+[25/Jan/2019 12:05:01] "GET /index/ HTTP/1.1" 200 49214
+[25/Jan/2019 12:05:04] "GET /perecord/overtime/list/ HTTP/1.1" 200 19246
+[25/Jan/2019 12:05:05] "GET /perecord/overtime/report/?page=1&limit=10 HTTP/1.1" 200 1898
+[25/Jan/2019 12:05:23] "GET /coderelease/project/list/ HTTP/1.1" 200 19947
+[25/Jan/2019 12:05:29] "GET /coderelease/project/detail/12 HTTP/1.1" 200 29031
+[25/Jan/2019 12:05:38] "GET /coderelease/project/add/ HTTP/1.1" 200 22491
+[25/Jan/2019 12:06:06] "GET /assets/list/ HTTP/1.1" 200 24653
+[25/Jan/2019 12:06:08] "GET /coderelease/project/list/ HTTP/1.1" 200 19947
+[25/Jan/2019 12:06:09] "GET /coderelease/project/add/ HTTP/1.1" 200 22491
+[25/Jan/2019 12:08:01] "GET /monitor/env/status/ HTTP/1.1" 200 17555
+[25/Jan/2019 12:08:02] "GET /monitor/env/status/detail/3 HTTP/1.1" 200 25461
+[25/Jan/2019 13:51:04] "GET /monitor/report/ HTTP/1.0" 200 51
+Not Found: /favicon.ico
+[25/Jan/2019 13:51:04] "GET /favicon.ico HTTP/1.0" 404 3142
+[25/Jan/2019 13:51:19] "GET /monitor/report/ HTTP/1.0" 200 51
+[25/Jan/2019 13:56:50] "POST /monitor/report/ HTTP/1.0" 200 71
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 25, 2019 - 12:04:37
+Django version 2.1.4, using settings 'OMServer.settings'
+Starting development server at http://192.168.100.202:8000/
+Quit the server with CONTROL-C.
+guoxuesong
+<QueryDict: {'page': ['1'], 'limit': ['10']}>
+7
+{'code': 0, 'msg': '', 'count': 7, 'data': [{'name': 'guoxuesong', 's_time': '2019-01-06 18:00:00', 'e_time': '2019-01-07 02:00:00', 'overtime_hours': '8:00:00', 'c_time': '2019-01-06 21:52:11', 'memo': '考试维度个性化成绩分析报告上线'}, {'name': 'guoxuesong', 's_time': '2019-01-07 02:00:00', 'e_time': '2019-01-07 03:00:00', 'overtime_hours': '1:00:00', 'c_time': '2019-01-07 02:48:05', 'memo': '同上                                       '}, {'name': 'guoxuesong', 's_time': '2019-01-08 23:30:00', 'e_time': '2019-01-09 01:30:00', 'overtime_hours': '2:00:00', 'c_time': '2019-01-09 16:16:41', 'memo': '                          家庭端紧急上线            '}, {'name': 'guoxuesong', 's_time': '2019-01-13 23:30:00', 'e_time': '2019-01-14 02:30:00', 'overtime_hours': '3:00:00', 'c_time': '2019-01-14 02:10:29', 'memo': '      jenkins部分pod数据库账号密码更改                                '}, {'name': 'guoxuesong', 's_time': '2019-01-14 22:00:00', 'e_time': '2019-01-15 04:00:00', 'overtime_hours': '6:00:00', 'c_time': '2019-01-15 03:49:18', 'memo': '           现在资源调整and服务调试                             '}, {'name': 'guoxuesong', 's_time': '2019-01-15 04:00:00', 'e_time': '2019-01-15 07:00:00', 'overtime_hours': '3:00:00', 'c_time': '2019-01-15 06:58:50', 'memo': '          监控配置中心                              '}, {'name': 'guoxuesong', 's_time': '2019-01-17 22:00:00', 'e_time': '2019-01-18 03:06:11', 'overtime_hours': '5:06:00', 'c_time': '2019-01-18 03:06:32', 'memo': '                     线上资源调整 家庭端上线                  '}]}
+guoxuesong
+<QueryDict: {'page': ['1'], 'limit': ['10']}>
+7
+{'code': 0, 'msg': '', 'count': 7, 'data': [{'name': 'guoxuesong', 's_time': '2019-01-06 18:00:00', 'e_time': '2019-01-07 02:00:00', 'overtime_hours': '8:00:00', 'c_time': '2019-01-06 21:52:11', 'memo': '考试维度个性化成绩分析报告上线'}, {'name': 'guoxuesong', 's_time': '2019-01-07 02:00:00', 'e_time': '2019-01-07 03:00:00', 'overtime_hours': '1:00:00', 'c_time': '2019-01-07 02:48:05', 'memo': '同上                                       '}, {'name': 'guoxuesong', 's_time': '2019-01-08 23:30:00', 'e_time': '2019-01-09 01:30:00', 'overtime_hours': '2:00:00', 'c_time': '2019-01-09 16:16:41', 'memo': '                          家庭端紧急上线            '}, {'name': 'guoxuesong', 's_time': '2019-01-13 23:30:00', 'e_time': '2019-01-14 02:30:00', 'overtime_hours': '3:00:00', 'c_time': '2019-01-14 02:10:29', 'memo': '      jenkins部分pod数据库账号密码更改                                '}, {'name': 'guoxuesong', 's_time': '2019-01-14 22:00:00', 'e_time': '2019-01-15 04:00:00', 'overtime_hours': '6:00:00', 'c_time': '2019-01-15 03:49:18', 'memo': '           现在资源调整and服务调试                             '}, {'name': 'guoxuesong', 's_time': '2019-01-15 04:00:00', 'e_time': '2019-01-15 07:00:00', 'overtime_hours': '3:00:00', 'c_time': '2019-01-15 06:58:50', 'memo': '          监控配置中心                              '}, {'name': 'guoxuesong', 's_time': '2019-01-17 22:00:00', 'e_time': '2019-01-18 03:06:11', 'overtime_hours': '5:06:00', 'c_time': '2019-01-18 03:06:32', 'memo': '                     线上资源调整 家庭端上线                  '}]}
+guoxuesong
+<QueryDict: {'page': ['1'], 'limit': ['20']}>
+7
+{'code': 0, 'msg': '', 'count': 7, 'data': [{'name': 'guoxuesong', 's_time': '2019-01-06 18:00:00', 'e_time': '2019-01-07 02:00:00', 'overtime_hours': '8:00:00', 'c_time': '2019-01-06 21:52:11', 'memo': '考试维度个性化成绩分析报告上线'}, {'name': 'guoxuesong', 's_time': '2019-01-07 02:00:00', 'e_time': '2019-01-07 03:00:00', 'overtime_hours': '1:00:00', 'c_time': '2019-01-07 02:48:05', 'memo': '同上                                       '}, {'name': 'guoxuesong', 's_time': '2019-01-08 23:30:00', 'e_time': '2019-01-09 01:30:00', 'overtime_hours': '2:00:00', 'c_time': '2019-01-09 16:16:41', 'memo': '                          家庭端紧急上线            '}, {'name': 'guoxuesong', 's_time': '2019-01-13 23:30:00', 'e_time': '2019-01-14 02:30:00', 'overtime_hours': '3:00:00', 'c_time': '2019-01-14 02:10:29', 'memo': '      jenkins部分pod数据库账号密码更改                                '}, {'name': 'guoxuesong', 's_time': '2019-01-14 22:00:00', 'e_time': '2019-01-15 04:00:00', 'overtime_hours': '6:00:00', 'c_time': '2019-01-15 03:49:18', 'memo': '           现在资源调整and服务调试                             '}, {'name': 'guoxuesong', 's_time': '2019-01-15 04:00:00', 'e_time': '2019-01-15 07:00:00', 'overtime_hours': '3:00:00', 'c_time': '2019-01-15 06:58:50', 'memo': '          监控配置中心                              '}, {'name': 'guoxuesong', 's_time': '2019-01-17 22:00:00', 'e_time': '2019-01-18 03:06:11', 'overtime_hours': '5:06:00', 'c_time': '2019-01-18 03:06:32', 'memo': '                     线上资源调整 家庭端上线                  '}]}
+wenqi wenqi19891017
+<QuerySet [<User: admin>, <User: wenqi>, <User: guoxuesong>]>
+wenqi
+<QueryDict: {'page': ['1'], 'limit': ['10']}>
+6
+{'code': 0, 'msg': '', 'count': 6, 'data': [{'name': 'wenqi', 's_time': '2019-01-04 21:00:00', 'e_time': '2019-01-05 03:00:00', 'overtime_hours': '6:00:00', 'c_time': '2019-01-05 20:01:31', 'memo': '预发布环境准备，好未来项目上线       '}, {'name': 'wenqi', 's_time': '2019-01-05 21:00:00', 'e_time': '2019-01-06 03:00:00', 'overtime_hours': '6:00:00', 'c_time': '2019-01-06 16:05:47', 'memo': '线上环境模拟上传成绩压测，配合测试部查看服务状态监控                            '}, {'name': 'wenqi', 's_time': '2019-01-07 21:00:00', 'e_time': '2019-01-07 23:00:00', 'overtime_hours': '2:00:00', 'c_time': '2019-01-07 22:42:19', 'memo': '生产环境平台web防火墙调试和测试                                        '}, {'name': 'wenqi', 's_time': '2019-01-08 00:00:00', 'e_time': '2019-01-08 04:30:00', 'overtime_hours': '4:30:00', 'c_time': '2019-01-08 16:25:35', 'memo': '在家加班，配合查看cc攻击日志，家庭端线上环境上线支撑   '}, {'name': 'wenqi', 's_time': '2019-01-10 21:00:00', 'e_time': '2019-01-10 22:30:00', 'overtime_hours': '1:30:00', 'c_time': '2019-01-11 09:21:51', 'memo': 'C端业务上线，发布 web-biz-parent 和 ud-wxpush\n网阅业务上线，发布so-exam和 web-biz-teacher-onlinescoring                                       '}, {'name': 'wenqi', 's_time': '2019-01-13 23:00:00', 'e_time': '2019-01-14 02:00:00', 'overtime_hours': '3:00:00', 'c_time': '2019-01-14 02:11:19', 'memo': '各端线上数据库密码统一修改                                        '}]}
+[pre]: 环境暂无数据
+[dev]: 环境暂无数据
+[re]: 环境暂无数据
+[[81, 78, 3, datetime.datetime(2018, 12, 6, 11, 21, 57, 187517)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 21, 0, 507371)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 19, 58, 893260)], [81, 77, 4, datetime.datetime(2018, 12, 6, 11, 19, 1, 964266)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 18, 4, 274350)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 10, 40, 464572)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 9, 53, 235723)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 8, 10, 307824)], [81, 78, 3, datetime.datetime(2018, 12, 6, 10, 8, 53, 136430)], [81, 78, 3, datetime.datetime(2018, 12, 6, 9, 49, 0, 138652)]]
+已插入[142]条数据: UP:[139]条, DOWN:[3]条
+[[81, 78, 3, datetime.datetime(2018, 12, 6, 11, 21, 57, 187517)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 21, 0, 507371)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 19, 58, 893260)], [81, 77, 4, datetime.datetime(2018, 12, 6, 11, 19, 1, 964266)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 18, 4, 274350)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 10, 40, 464572)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 9, 53, 235723)], [81, 78, 3, datetime.datetime(2018, 12, 6, 11, 8, 10, 307824)], [81, 78, 3, datetime.datetime(2018, 12, 6, 10, 8, 53, 136430)], [81, 78, 3, datetime.datetime(2018, 12, 6, 9, 49, 0, 138652)]][25/Jan/2019 13:57:07] "GET /monitor/env/status/detail/3 HTTP/1.1" 200 25461
+[25/Jan/2019 13:57:08] "GET /static/production/images/favicon.ico HTTP/1.1" 200 4606
+[25/Jan/2019 13:57:37] "GET / HTTP/1.1" 200 2593
+[25/Jan/2019 14:22:24] "GET /monitor/env/status/detail/3 HTTP/1.1" 200 25461
+[25/Jan/2019 14:22:25] "GET /static/production/images/favicon.ico HTTP/1.1" 200 4606
+[25/Jan/2019 14:22:35] "POST /monitor/report/ HTTP/1.0" 200 71
+[25/Jan/2019 14:22:42] "GET /monitor/env/status/detail/4 HTTP/1.1" 200 25482
+[25/Jan/2019 14:24:41] "POST /monitor/report/ HTTP/1.0" 200 71
+[25/Jan/2019 14:24:45] "GET /monitor/env/status/detail/4 HTTP/1.1" 200 25482
+[25/Jan/2019 14:24:45] "GET /static/production/images/favicon.ico HTTP/1.1" 200 4606
+[25/Jan/2019 14:24:51] "GET /monitor/env/status/detail/4 HTTP/1.1" 200 25482
+[25/Jan/2019 14:24:51] "GET /static/production/images/favicon.ico HTTP/1.1" 200 4606
